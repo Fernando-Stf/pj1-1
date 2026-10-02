@@ -2,7 +2,9 @@
    Reset & Base Styles
    ======================== */
 
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,6 +14,9 @@ html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 body {
@@ -20,6 +25,17 @@ body {
     color: #f5f5f5;
     line-height: 1.6;
     overflow-x: hidden;
+    overscroll-behavior-x: none;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+img,
+picture,
+video,
+iframe {
+    max-width: 100%;
 }
 
 body.menu-open {
@@ -87,6 +103,7 @@ h1, h2, h3, h4, h5, h6 {
    ======================== */
 
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--page-x);
@@ -94,7 +111,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .container-full {
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     padding: 0 var(--page-x);
+}
+
+.sobre-grid,
+.experiencia-grid,
+.servicos-grid,
+.galeria-grid,
+.barbeiros-grid,
+.depoimentos-grid,
+.footer-grid,
+.hero-ctas,
+.cta-buttons {
+    width: 100%;
+    max-width: 100%;
+}
+
+.sobre-grid > *,
+.experiencia-grid > *,
+.servicos-grid > *,
+.galeria-grid > *,
+.barbeiros-grid > *,
+.depoimentos-grid > *,
+.footer-grid > * {
+    min-width: 0;
+    max-width: 100%;
 }
 
 /* ========================
@@ -119,6 +162,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 max(var(--page-x), env(safe-area-inset-right, 0px)) 0 max(var(--page-x), env(safe-area-inset-left, 0px));
@@ -327,7 +371,9 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     z-index: 10;
     text-align: center;
+    width: 100%;
     max-width: 800px;
+    margin: 0 auto;
     padding: 0 var(--page-x);
 }
 
