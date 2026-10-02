@@ -1,0 +1,138 @@
+{
+  "name": "barber-premium",
+  "title": "Barber Premium — Landing Page",
+  "version": "1.0.0",
+  "description": "Landing page profissional de barbearia premium com design editorial sofisticado",
+  "author": "Claude Code",
+  "license": "Commercial",
+  "buildTools": {
+    "cssMinification": false,
+    "jsMinification": false,
+    "imageOptimization": false
+  },
+  "performance": {
+    "lighthouse": {
+      "target": 90,
+      "metrics": {
+        "firstContentfulPaint": "< 2s",
+        "largestContentfulPaint": "< 2.5s",
+        "cumulativeLayoutShift": "< 0.1"
+      }
+    },
+    "lazyLoading": true,
+    "serviceWorker": false
+  },
+  "accessibility": {
+    "wcagLevel": "AA",
+    "keyboardNavigation": true,
+    "ariaLabels": true,
+    "semanticHTML": true
+  },
+  "seo": {
+    "titleTag": "Barber Premium — Tradição no Corte, Precisão em Cada Detalhe",
+    "metaDescription": "Barbearia premium com profissionais especializados, atendimento personalizado e ambiente exclusivo.",
+    "openGraph": true,
+    "structuredData": true
+  },
+  "design": {
+    "colorMode": "dark",
+    "primaryColor": "#c9a961",
+    "typography": {
+      "serif": "Playfair Display",
+      "sansSerif": "Inter",
+      "subtitle": "Montserrat"
+    },
+    "spacing": {
+      "desktopPadding": "6rem",
+      "mobilePadding": "2rem",
+      "tabletPadding": "4rem"
+    },
+    "breakpoints": {
+      "desktop": "1200px",
+      "tablet": "768px",
+      "mobile": "480px"
+    }
+  },
+  "sections": [
+    {
+      "id": "navbar",
+      "name": "Navigation",
+      "responsive": true,
+      "mobile": "hamburger"
+    },
+    {
+      "id": "hero",
+      "name": "Hero Section",
+      "hasImage": true,
+      "ctas": 2
+    },
+    {
+      "id": "sobre",
+      "name": "Sobre (About)",
+      "layout": "2-column",
+      "hasStats": true
+    },
+    {
+      "id": "experiencia",
+      "name": "Experiência (Diferenciais)",
+      "items": 4,
+      "layout": "grid"
+    },
+    {
+      "id": "servicos",
+      "name": "Serviços",
+      "items": 4,
+      "hasPricing": true,
+      "layout": "card-grid"
+    },
+    {
+      "id": "galeria",
+      "name": "Galeria",
+      "layout": "masonry",
+      "hasLightbox": true
+    },
+    {
+      "id": "barbeiros",
+      "name": "Barbeiros (Team)",
+      "items": 3,
+      "layout": "card-grid"
+    },
+    {
+      "id": "depoimentos",
+      "name": "Depoimentos (Testimonials)",
+      "items": 3,
+      "layout": "grid",
+      "hasRating": true
+    },
+    {
+      "id": "cta-final",
+      "name": "CTA Final",
+      "ctas": 2
+    },
+    {
+      "id": "footer",
+      "name": "Footer",
+      "hasContact": true,
+      "hasSocial": true
+    }
+  ],
+  "conversions": {
+    "primaryCTA": "AGENDAR HORÁRIO",
+    "channels": ["whatsapp", "phone", "email"],
+    "tracking": false
+  },
+  "deployment": {
+    "hosting": ["Vercel", "Netlify", "TraditionalServer"],
+    "cdn": false,
+    "ssl": true
+  },
+  "images": {
+    "format": "jpg",
+    "fallback": "unsplash",
+    "optimization": {
+      "resize": true,
+      "compress": true,
+      "lazy": true
+    }
+  }
+}
