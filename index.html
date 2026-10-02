@@ -54,7 +54,10 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-background">
-            <img src="images/hero-barber.jpg" alt="Barber trabalhando com precisão" loading="lazy">
+            <picture>
+                <source media="(max-width: 720px)" srcset="images/7829d03c-8a37-4871-bf5e-0e6e6a3cf08f.jpg">
+                <img src="images/829c8e27-7aae-4bef-9aaf-0b2a4307a62d.jpg" alt="Barbearia Barber Premium" fetchpriority="high">
+            </picture>
             <div class="hero-overlay"></div>
         </div>
 
@@ -72,11 +75,11 @@
             </div>
         </div>
 
-        <div class="hero-scroll">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="hero-scroll" type="button" aria-label="Rolar para a seção Sobre">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M12 5v14M5 12l7 7 7-7"></path>
             </svg>
-        </div>
+        </button>
     </section>
 
     <!-- Sobre Section -->
@@ -111,33 +114,44 @@
     </section>
 
     <!-- Experiência Section -->
-    <section class="experiencia">
+    <section class="experiencia" aria-labelledby="experiencia-title">
         <div class="container">
-            <h2 class="section-title centered">Por Que Barber Premium</h2>
+            <div class="experiencia-intro">
+                <h2 class="section-title" id="experiencia-title">O cuidado está em cada detalhe.</h2>
+                <p>Um bom corte começa com uma conversa e termina quando cada detalhe está no lugar. É assim que transformamos técnica em uma experiência feita para você.</p>
+            </div>
 
             <div class="experiencia-grid">
                 <article class="experiencia-item">
-                    <div class="experiencia-number">01</div>
-                    <h3 class="experiencia-title">Atendimento Personalizado</h3>
-                    <p>Cada cliente é único. Entendemos seus desejos e criamos a experiência perfeita para você.</p>
+                    <span class="experiencia-number" aria-hidden="true">01</span>
+                    <div>
+                        <h3 class="experiencia-title">Escuta antes da tesoura</h3>
+                        <p>A gente entende seu estilo, sua rotina e o que você quer — antes de começar.</p>
+                    </div>
                 </article>
 
                 <article class="experiencia-item">
-                    <div class="experiencia-number">02</div>
-                    <h3 class="experiencia-title">Profissionais Especializados</h3>
-                    <p>Barbeiros com anos de experiência, constantemente atualizados nas melhores técnicas.</p>
+                    <span class="experiencia-number" aria-hidden="true">02</span>
+                    <div>
+                        <h3 class="experiencia-title">Mão de especialista</h3>
+                        <p>Técnica apurada em cada linha, degradê e acabamento, com atenção aos detalhes.</p>
+                    </div>
                 </article>
 
                 <article class="experiencia-item">
-                    <div class="experiencia-number">03</div>
-                    <h3 class="experiencia-title">Produtos Premium</h3>
-                    <p>Utilizamos apenas produtos de primeira linha, selecionados para qualidade e compatibilidade.</p>
+                    <span class="experiencia-number" aria-hidden="true">03</span>
+                    <div>
+                        <h3 class="experiencia-title">Produtos escolhidos a dedo</h3>
+                        <p>Produtos profissionais selecionados para cuidar do cabelo e da barba com qualidade.</p>
+                    </div>
                 </article>
 
                 <article class="experiencia-item">
-                    <div class="experiencia-number">04</div>
-                    <h3 class="experiencia-title">Ambiente Exclusivo</h3>
-                    <p>Espaço sofisticado, aconchegante e pensado em cada detalhe para sua comodidade.</p>
+                    <span class="experiencia-number" aria-hidden="true">04</span>
+                    <div>
+                        <h3 class="experiencia-title">Um espaço para desacelerar</h3>
+                        <p>Um ambiente acolhedor, feito para você aproveitar o momento e sair renovado.</p>
+                    </div>
                 </article>
             </div>
         </div>
@@ -148,42 +162,38 @@
         <div class="container">
             <h2 class="section-title">Nossos Serviços</h2>
 
-            <div class="servicos-grid">
-                <article class="servico-card featured">
-                    <div class="servico-header">
-                        <h3 class="servico-nome">Corte Tradicional</h3>
-                        <div class="servico-accent"></div>
-                    </div>
-                    <p class="servico-descricao">Corte clássico com acabamento impecável, adaptado ao seu rosto e preferências.</p>
-                    <div class="servico-preco">R$ 45</div>
-                </article>
-
-                <article class="servico-card">
-                    <div class="servico-header">
-                        <h3 class="servico-nome">Barba</h3>
-                        <div class="servico-accent"></div>
-                    </div>
-                    <p class="servico-descricao">Barbear com navalha profissional, esfoliação e balm pós-barbear.</p>
-                    <div class="servico-preco">R$ 35</div>
-                </article>
-
-                <article class="servico-card">
-                    <div class="servico-header">
+            <div class="servicos-layout">
+                <article class="servico-card servico-lead">
+                    <span class="servico-indice" aria-hidden="true">01</span>
+                    <div class="servico-corpo">
                         <h3 class="servico-nome">Corte + Barba</h3>
-                        <div class="servico-accent"></div>
+                        <p class="servico-descricao">A combinação da casa: corte completo seguido de barbear com navalha, esfoliação e acabamento premium. O ritual inteiro, do começo ao fim.</p>
                     </div>
-                    <p class="servico-descricao">Combinação perfeita: corte completo + barbear com acabamento premium.</p>
                     <div class="servico-preco">R$ 70</div>
                 </article>
 
-                <article class="servico-card highlight">
-                    <div class="servico-header">
+                <div class="servicos-lista">
+                    <article class="servico-card">
+                        <span class="servico-indice" aria-hidden="true">02</span>
+                        <h3 class="servico-nome">Corte Tradicional</h3>
+                        <p class="servico-descricao">Corte clássico com acabamento impecável, adaptado ao seu rosto e preferências.</p>
+                        <div class="servico-preco">R$ 45</div>
+                    </article>
+
+                    <article class="servico-card">
+                        <span class="servico-indice" aria-hidden="true">03</span>
+                        <h3 class="servico-nome">Barba</h3>
+                        <p class="servico-descricao">Barbear com navalha profissional, esfoliação e balm pós-barbear.</p>
+                        <div class="servico-preco">R$ 35</div>
+                    </article>
+
+                    <article class="servico-card">
+                        <span class="servico-indice" aria-hidden="true">04</span>
                         <h3 class="servico-nome">Corte Premium</h3>
-                        <div class="servico-accent"></div>
-                    </div>
-                    <p class="servico-descricao">Serviço completo com design personalizado, máquina de taper e acabamento de navalha.</p>
-                    <div class="servico-preco">R$ 60</div>
-                </article>
+                        <p class="servico-descricao">Design personalizado, máquina de taper e acabamento de navalha.</p>
+                        <div class="servico-preco">R$ 60</div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -193,12 +203,49 @@
         <div class="container-full">
             <h2 class="section-title">Galeria de Trabalhos</h2>
 
-            <div class="galeria-grid">
+            <div class="galeria-mosaico">
+                <figure class="galeria-item galeria-item-hero">
+                    <img src="images/fade.jpg" alt="Corte fade profissional" loading="lazy">
+                    <figcaption class="galeria-legenda">Fade</figcaption>
+                    <div class="galeria-overlay">
+                        <button class="galeria-expand" aria-label="Expandir imagem: corte fade profissional">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </figure>
+
+                <figure class="galeria-item galeria-item-wide">
+                    <img src="images/dentro da barbearia.jpg" alt="Ambiente interno da barbearia" loading="lazy">
+                    <figcaption class="galeria-legenda">A casa</figcaption>
+                    <div class="galeria-overlay">
+                        <button class="galeria-expand" aria-label="Expandir imagem: ambiente interno da barbearia">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </figure>
+
+                <figure class="galeria-item">
+                    <img src="images/navalha.jpg" alt="Detalhe de trabalho com navalha" loading="lazy">
+                    <figcaption class="galeria-legenda">Navalha</figcaption>
+                    <div class="galeria-overlay">
+                        <button class="galeria-expand" aria-label="Expandir imagem: detalhe de trabalho com navalha">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </figure>
+
                 <figure class="galeria-item galeria-item-tall">
-                    <img src="images/galeria-01.jpg" alt="Corte fade profissional" loading="lazy">
+                    <img src="images/barbeiro trabalhando.jpg" alt="Barbeiro trabalhando" loading="lazy">
+                    <figcaption class="galeria-legenda">Em trabalho</figcaption>
                     <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button class="galeria-expand" aria-label="Expandir imagem: barbeiro trabalhando">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                             </svg>
                         </button>
@@ -206,54 +253,23 @@
                 </figure>
 
                 <figure class="galeria-item">
-                    <img src="images/galeria-02.jpg" alt="Detalhe de trabalho com navalha" loading="lazy">
+                    <img src="images/corte degrade.jpg" alt="Corte degradê fino" loading="lazy">
+                    <figcaption class="galeria-legenda">Degradê</figcaption>
                     <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button class="galeria-expand" aria-label="Expandir imagem: corte degradê fino">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                             </svg>
                         </button>
                     </div>
                 </figure>
 
-                <figure class="galeria-item">
-                    <img src="images/galeria-03.jpg" alt="Barbeiro trabalhando" loading="lazy">
+                <figure class="galeria-item galeria-item-wide">
+                    <img src="images/dentro da barbearia (2).jpg" alt="Interior da barbearia em funcionamento" loading="lazy">
+                    <figcaption class="galeria-legenda">Detalhe</figcaption>
                     <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </figure>
-
-                <figure class="galeria-item galeria-item-tall">
-                    <img src="images/galeria-04.jpg" alt="Corte degradê fino" loading="lazy">
-                    <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </figure>
-
-                <figure class="galeria-item">
-                    <img src="images/galeria-05.jpg" alt="Ambiente interno da barbearia" loading="lazy">
-                    <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </figure>
-
-                <figure class="galeria-item">
-                    <img src="images/galeria-06.jpg" alt="Detalhe de produtos premium" loading="lazy">
-                    <div class="galeria-overlay">
-                        <button class="galeria-expand" aria-label="Expandir imagem">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button class="galeria-expand" aria-label="Expandir imagem: detalhe de produtos premium">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
                             </svg>
                         </button>
@@ -304,42 +320,32 @@
         <div class="container">
             <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
 
-            <div class="depoimentos-grid">
-                <article class="depoimento-card">
-                    <div class="depoimento-stars">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="depoimento-texto">Desde o primeiro corte virei cliente. O atendimento é impecável e o acabamento impecável. Recomendo para todo mundo.</p>
-                    <p class="depoimento-autor">— Lucas Almeida</p>
-                </article>
-
-                <article class="depoimento-card highlight">
-                    <div class="depoimento-stars">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
+            <div class="depoimentos-layout">
+                <blockquote class="depoimento-card depoimento-lead">
+                    <div class="depoimento-stars" aria-label="5 de 5 estrelas">
+                        <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
                     </div>
                     <p class="depoimento-texto">Ambiente muito bem decorado, profissionais de verdade. Você sente que cada um sabe o que está fazendo. Vale cada real investido.</p>
-                    <p class="depoimento-autor">— Felipe Rodrigues</p>
-                </article>
+                    <footer class="depoimento-autor">Felipe Rodrigues</footer>
+                </blockquote>
 
-                <article class="depoimento-card">
-                    <div class="depoimento-stars">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="depoimento-texto">Achei caro no começo, mas depois que você vai uma vez, você entende. É qualidade mesmo. Agora estou indo regularmente.</p>
-                    <p class="depoimento-autor">— Carlos Mendes</p>
-                </article>
+                <div class="depoimentos-coluna">
+                    <blockquote class="depoimento-card">
+                        <div class="depoimento-stars" aria-label="5 de 5 estrelas">
+                            <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+                        </div>
+                        <p class="depoimento-texto">Desde o primeiro corte virei cliente. O atendimento é impecável e o acabamento impecável. Recomendo para todo mundo.</p>
+                        <footer class="depoimento-autor">Lucas Almeida</footer>
+                    </blockquote>
+
+                    <blockquote class="depoimento-card">
+                        <div class="depoimento-stars" aria-label="5 de 5 estrelas">
+                            <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+                        </div>
+                        <p class="depoimento-texto">Achei caro no começo, mas depois que você vai uma vez, você entende. É qualidade mesmo. Agora estou indo regularmente.</p>
+                        <footer class="depoimento-autor">Carlos Mendes</footer>
+                    </blockquote>
+                </div>
             </div>
         </div>
     </section>
@@ -369,20 +375,35 @@
 
                 <div class="footer-info">
                     <h3 class="footer-title">Contato</h3>
-                    <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
-                    <p><a href="https://wa.me/5511999999999" target="_blank" rel="noopener">WhatsApp</a></p>
-                    <p>Rua Exemplo, 123<br>São Paulo, SP</p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2.1z"/></svg>
+                        <a href="tel:+5511999999999">(11) 99999-9999</a>
+                    </p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5z"/></svg>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener">WhatsApp</a>
+                    </p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Rua Exemplo, 123<br>São Paulo, SP</span>
+                    </p>
                     <!-- contact-clean -->
-                    <p hidden><a href="tel:+5511999999999">📞 (11) 99999-9999</a></p>
-                    <p><a href="https://wa.me/5511999999999" target="_blank" rel="noopener">💬 WhatsApp</a></p>
-                    <p>📍 Rua Exemplo, 123<br>São Paulo, SP</p>
                 </div>
 
                 <div class="footer-hours">
                     <h3 class="footer-title">Horários</h3>
-                    <p>Seg-Sex: 09:00 - 20:00</p>
-                    <p>Sábado: 09:00 - 18:00</p>
-                    <p>Domingo: Fechado</p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                        <span>Seg-Sex: 09:00 - 20:00</span>
+                    </p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                        <span>Sábado: 09:00 - 18:00</span>
+                    </p>
+                    <p>
+                        <svg class="footer-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>
+                        <span>Domingo: Fechado</span>
+                    </p>
                 </div>
 
                 <div class="footer-social">
@@ -411,7 +432,7 @@
     <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" aria-label="Fechar">&times;</button>
-        <img class="lightbox-image" src="images/galeria-01.jpg" alt="Imagem ampliada da galeria">
+        <img class="lightbox-image" src="images/fade.jpg" alt="Imagem ampliada da galeria">
         <button class="lightbox-prev" aria-label="Anterior">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M15 18l-6-6 6-6"></path>

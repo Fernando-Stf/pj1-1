@@ -65,7 +65,9 @@ a, button {
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-alt: 0.4s ease-in-out;
     --page-x: clamp(1.15rem, 4.2vw, 2rem);
-    --section-y: clamp(3.25rem, 7.2vw, 6rem);
+    --section-y: clamp(4rem, 8vw, 7rem);
+    --rule: rgba(201, 169, 97, 0.22);
+    --copy-muted: rgba(245, 245, 245, 0.72);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,14 +75,20 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
 }
 
 .section-title {
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 3rem;
+    letter-spacing: 0.035em;
+    line-height: 1.04;
+    margin-bottom: clamp(1.75rem, 4vw, 3rem);
     color: var(--white);
 }
 
@@ -118,10 +126,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .sobre-grid,
 .experiencia-grid,
-.servicos-grid,
-.galeria-grid,
+.servicos-layout,
+.servicos-lista,
+.galeria-mosaico,
 .barbeiros-grid,
-.depoimentos-grid,
+.depoimentos-layout,
+.depoimentos-coluna,
 .footer-grid,
 .hero-ctas,
 .cta-buttons {
@@ -131,10 +141,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .sobre-grid > *,
 .experiencia-grid > *,
-.servicos-grid > *,
-.galeria-grid > *,
+.servicos-layout > *,
+.servicos-lista > *,
+.galeria-mosaico > *,
 .barbeiros-grid > *,
-.depoimentos-grid > *,
+.depoimentos-layout > *,
+.depoimentos-coluna > *,
 .footer-grid > * {
     min-width: 0;
     max-width: 100%;
@@ -151,14 +163,15 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
     z-index: 1000;
     background: transparent;
-    transition: background var(--transition);
+    transition: background var(--transition), padding var(--transition), border-color var(--transition);
     padding: 1.5rem 0;
 }
 
 .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.96);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.18);
     backdrop-filter: blur(10px);
-    padding: 1rem 0;
+    padding: 0.85rem 0;
 }
 
 .navbar-container {
@@ -228,7 +241,13 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform var(--transition);
 }
 
-.nav-link:hover::after {
+.nav-link:hover,
+.nav-link:focus-visible {
+    color: var(--accent);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
     transform: scaleX(1);
 }
 
@@ -330,6 +349,12 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--black);
 }
 
+.cta-primary:focus-visible,
+.cta-button:focus-visible {
+    outline-color: var(--white);
+    outline-offset: 4px;
+}
+
 .cta-secondary.large {
     padding: 1.25rem 3rem;
     font-size: 14px;
@@ -343,11 +368,12 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     height: 100vh;
     height: 100svh;
-    min-height: 32rem;
+    min-height: 36rem;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: var(--black);
 }
 
 .hero-background {
@@ -355,63 +381,70 @@ h1, h2, h3, h4, h5, h6 {
     inset: 0;
 }
 
+.hero-background picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-background img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 42%;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 52%, rgba(0, 0, 0, 0.25) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent 42%);
 }
 
 .hero-content {
     position: relative;
     z-index: 10;
-    text-align: center;
+    text-align: left;
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--page-x);
+    padding: 5rem var(--page-x) 3rem;
 }
 
 .hero-badge {
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     color: var(--accent);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-title {
-    font-size: clamp(42px, 8vw, 80px);
-    font-weight: 900;
+    max-width: 13ch;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 700;
     color: var(--white);
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
     animation: fadeInUp 0.8s ease-out 0.15s both;
 }
 
 .hero-subtitle {
-    font-size: clamp(16px, 2vw, 20px);
-    color: rgba(245, 245, 245, 0.8);
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: rgba(245, 245, 245, 0.82);
+    margin-bottom: 2rem;
+    max-width: 48ch;
     animation: fadeInUp 0.8s ease-out 0.25s both;
 }
 
 .hero-ctas {
     display: flex;
-    gap: 1.5rem;
-    justify-content: center;
+    gap: 0.85rem;
+    justify-content: flex-start;
     flex-wrap: wrap;
     animation: fadeInUp 0.8s ease-out 0.35s both;
 }
@@ -419,10 +452,12 @@ h1, h2, h3, h4, h5, h6 {
 .hero-scroll {
     position: absolute;
     bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    transform: translateX(-50%);
+    left: max(var(--page-x), env(safe-area-inset-left, 0px));
     color: var(--white);
-    animation: fadeInDown 1s ease-out;
+    opacity: 0.75;
+    background: transparent;
+    border: 0;
+    animation: fadeInUp 1s ease-out 0.5s both;
     cursor: pointer;
     width: 44px;
     height: 44px;
@@ -445,11 +480,11 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(-20px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -464,22 +499,69 @@ h1, h2, h3, h4, h5, h6 {
 
 .sobre-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    gap: clamp(2.5rem, 7vw, 6rem);
     align-items: center;
 }
 
 .sobre-image {
     position: relative;
-    overflow: hidden;
+    isolation: isolate;
+    padding: 0 1.25rem 1.25rem 0;
+}
+
+.sobre-image::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    bottom: 0;
+    width: 72%;
+    height: 72%;
+    border-right: 1px solid rgba(201, 169, 97, 0.55);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.55);
+    pointer-events: none;
 }
 
 .sobre-image img {
     width: 100%;
-    height: 600px;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
     display: block;
     animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.sobre-content .section-title {
+    max-width: 13ch;
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.sobre-content .section-text {
+    max-width: 54ch;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--copy-muted);
+}
+
+.sobre-stats {
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+}
+
+.stat-number {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.stat-label {
+    max-width: 18ch;
+    line-height: 1.5;
 }
 
 .section-text {
@@ -525,6 +607,23 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5rem;
 }
 
+.sobre-content .sobre-stats {
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top-color: rgba(201, 169, 97, 0.35);
+}
+
+.sobre-content .stat-number {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.sobre-content .stat-label {
+    max-width: 18ch;
+    line-height: 1.5;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -539,62 +638,87 @@ h1, h2, h3, h4, h5, h6 {
    ======================== */
 
 .experiencia {
-    padding: var(--section-y) 0;
+    padding: clamp(4rem, 8vw, 7rem) 0;
     background: var(--dark-gray);
+}
+
+.experiencia-intro {
+    max-width: 54rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.experiencia-intro .section-title {
+    max-width: 18ch;
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: 0.05em;
+}
+
+.experiencia-intro > p {
+    max-width: 62ch;
+    margin: 0;
+    color: rgba(245, 245, 245, 0.72);
+    font-size: 0.95rem;
+    line-height: 1.8;
 }
 
 .experiencia-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem 4rem;
-    max-width: 900px;
-    margin: 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    border-top: 1px solid rgba(201, 169, 97, 0.3);
 }
 
 .experiencia-item {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1rem;
+    width: min(68%, 42rem);
     padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
 }
 
 .experiencia-item:nth-child(odd) {
-    text-align: left;
-    padding-right: 2rem;
+    justify-self: start;
+    padding-right: clamp(1.5rem, 4vw, 4rem);
 }
 
 .experiencia-item:nth-child(even) {
-    text-align: right;
-    padding-left: 2rem;
+    justify-self: end;
+    padding-left: clamp(1.5rem, 4vw, 4rem);
+    border-left: 1px solid rgba(201, 169, 97, 0.2);
 }
 
 .experiencia-number {
+    padding-top: 0.15rem;
     font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    font-weight: 900;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--accent);
-    line-height: 1;
-    margin-bottom: 1rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
 }
 
 .experiencia-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    margin: 0 0 0.65rem;
     color: var(--white);
-    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
 }
 
 .experiencia-item p {
-    font-size: 15px;
-    line-height: 1.7;
+    max-width: 42ch;
     color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.75;
 }
 
 /* ========================
    Serviços Section
+   Lead ritual on the left, supporting
+   menu stacked on the right.
    ======================== */
 
 .servicos {
@@ -602,67 +726,116 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--black);
 }
 
-.servicos-grid {
+.servicos > .container > .section-title {
+    max-width: 12ch;
+}
+
+.servicos-layout {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 2.5rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: stretch;
+}
+
+.servicos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 .servico-card {
-    padding: 2.5rem;
-    background: var(--dark-gray);
-    border: 1px solid rgba(201, 169, 97, 0.1);
-    transition: var(--transition);
     position: relative;
-    overflow: hidden;
+    padding: 1.6rem 0 1.6rem 4.25rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.18);
+    overflow: visible;
 }
 
-.servico-card:first-child {
-    border-left: 3px solid var(--accent);
+.servicos-lista .servico-card:last-child {
+    border-bottom: none;
 }
 
-.servico-card:last-child {
-    background: rgba(201, 169, 97, 0.04);
-}
-
-.servico-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+.servico-indice {
+    position: absolute;
+    left: 0;
+    top: 1.45rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    line-height: 1;
 }
 
 .servico-nome {
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--white);
-}
-
-.servico-accent {
-    width: 32px;
-    height: 1px;
-    background: var(--accent);
+    margin-bottom: 0.55rem;
 }
 
 .servico-descricao {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: rgba(245, 245, 245, 0.7);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .servico-preco {
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--accent);
 }
 
+.servico-lead {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 30rem;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    background: linear-gradient(145deg, rgba(201, 169, 97, 0.11), rgba(26, 26, 26, 0.28) 48%, #111 100%);
+    border: 1px solid rgba(201, 169, 97, 0.24);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.24);
+}
+
+.servico-lead .servico-indice {
+    position: static;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.82;
+    margin-bottom: auto;
+    color: rgba(201, 169, 97, 0.55);
+}
+
+.servico-lead .servico-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.85rem;
+}
+
+.servico-lead .servico-descricao {
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 34ch;
+    margin-bottom: 1.75rem;
+}
+
+.servico-lead .servico-preco {
+    font-size: 36px;
+}
+
 /* ========================
    Galeria Section
+   One solid rectangle: a tall hero on
+   the left, a matching photo filling
+   the right, then a full-width strip.
    ======================== */
 
 .galeria {
@@ -670,64 +843,95 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--dark-gray);
 }
 
-.galeria-grid {
+.galeria > .container-full > .section-title {
+    max-width: 14ch;
+}
+
+.galeria-mosaico {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    grid-auto-rows: 200px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: minmax(140px, 12vw) minmax(140px, 12vw) minmax(160px, 15vw);
+    gap: 0.85rem;
 }
 
 .galeria-item {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    margin: 0;
+    grid-column: span 3;
+}
+
+.galeria-item-hero {
+    grid-column: 1 / 8;
+    grid-row: 1 / 3;
+}
+
+.galeria-item-wide {
+    grid-column: 8 / 13;
+    grid-row: 1 / 3;
 }
 
 .galeria-item-tall {
-    grid-row: span 2;
-    grid-column: span 1;
+    grid-column: span 3;
+    grid-row: span 1;
 }
 
-.galeria-item:nth-child(2) {
-    grid-column: span 1;
-}
-
-.galeria-item:nth-child(5) {
-    grid-column: span 1;
-}
+.galeria-item:nth-child(3) { grid-column: 1 / 4; grid-row: 3; }
+.galeria-item:nth-child(4) { grid-column: 4 / 8; grid-row: 3; }
+.galeria-item:nth-child(5) { grid-column: 8 / 11; grid-row: 3; }
+.galeria-item:nth-child(6) { grid-column: 11 / 13; grid-row: 3; }
 
 .galeria-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition);
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .galeria-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+}
+
+.galeria-legenda {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white);
+    pointer-events: none;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
 }
 
 .galeria-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 46%);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0.85rem;
     opacity: 0;
     transition: opacity var(--transition);
 }
 
-.galeria-item:hover .galeria-overlay {
+.galeria-item:hover .galeria-overlay,
+.galeria-item:focus-visible .galeria-overlay {
     opacity: 1;
 }
 
 .galeria-expand {
-    background: var(--accent);
+    background: var(--white);
     color: var(--black);
     border: none;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -737,7 +941,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .galeria-expand:hover {
-    transform: scale(1.1);
+    background: var(--accent);
 }
 
 /* ========================
@@ -751,8 +955,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .barbeiros-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
 }
 
@@ -766,9 +970,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .barbeiro-card:nth-child(n+2) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.55fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1.25rem;
+}
+
+.barbeiro-card:nth-child(n+2) .barbeiro-image {
+    grid-row: span 3;
+    margin: 0;
+    height: 190px;
+}
+
+.barbeiro-card:nth-child(n+2) .barbeiro-nome,
+.barbeiro-card:nth-child(n+2) .barbeiro-titulo,
+.barbeiro-card:nth-child(n+2) .barbeiro-descricao {
+    grid-column: 2;
+}
+
+.barbeiro-card:nth-child(n+2) .barbeiro-nome {
+    align-self: end;
+}
+
+.barbeiro-card:nth-child(n+2) .barbeiro-descricao {
+    align-self: start;
 }
 
 .barbeiro-image {
@@ -821,6 +1046,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ========================
    Depoimentos Section
+   One quote carries the page.
+   Two supporting voices stack beside it.
    ======================== */
 
 .depoimentos {
@@ -828,34 +1055,46 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--dark-gray);
 }
 
-.depoimentos-grid {
+.depoimentos-layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: stretch;
 }
 
-.depoimento-card {
-    padding: 2rem;
-    background: var(--black);
-    border-top: 1px solid var(--accent);
+.depoimentos-coluna {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 0;
+    border-left: 1px solid rgba(201, 169, 97, 0.22);
+    padding-left: 2.5rem;
 }
 
-.depoimento-card:nth-child(2) {
-    background: var(--dark-gray);
-    border-top: 2px solid var(--accent);
-    padding: 2.5rem;
-    grid-row: span 1;
+.depoimento-card {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.depoimentos-coluna .depoimento-card {
+    padding: 1.75rem 0;
+    border-top: 1px solid rgba(201, 169, 97, 0.14);
+}
+
+.depoimentos-coluna .depoimento-card:first-child {
+    padding-top: 0;
+    border-top: none;
 }
 
 .depoimento-stars {
     display: flex;
-    gap: 0.25rem;
-    margin-bottom: 1.5rem;
-    font-size: 16px;
+    gap: 0.15rem;
+    margin-bottom: 1.15rem;
+    font-size: 13px;
 }
 
 .star {
@@ -864,18 +1103,46 @@ h1, h2, h3, h4, h5, h6 {
 
 .depoimento-texto {
     font-size: 15px;
-    line-height: 1.8;
-    color: rgba(245, 245, 245, 0.8);
-    margin-bottom: 1.5rem;
+    line-height: 1.75;
+    color: rgba(245, 245, 245, 0.78);
+    margin-bottom: 1.15rem;
 }
 
 .depoimento-autor {
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     color: var(--accent);
+}
+
+.depoimento-autor::before {
+    content: '— ';
+}
+
+.depoimento-lead {
+    justify-content: flex-end;
+    padding-bottom: 0.25rem;
+}
+
+.depoimento-lead .depoimento-stars {
+    font-size: 15px;
+    margin-bottom: 1.75rem;
+}
+
+.depoimento-lead .depoimento-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3.2vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--white);
+    margin-bottom: 1.75rem;
+}
+
+.depoimento-lead .depoimento-autor {
+    font-size: 12px;
 }
 
 /* ========================
@@ -883,24 +1150,36 @@ h1, h2, h3, h4, h5, h6 {
    ======================== */
 
 .cta-final {
-    padding: var(--section-y) 0;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(4.5rem, 9vw, 8rem) 0;
     background: var(--black);
     text-align: center;
 }
 
+.cta-final::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.09), transparent 68%);
+    pointer-events: none;
+}
+
 .cta-title {
-    font-size: clamp(36px, 5vw, 64px);
-    margin-bottom: 1rem;
+    max-width: 15ch;
+    margin: 0 auto 1rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.02;
     color: var(--white);
 }
 
 .cta-subtitle {
-    font-size: 18px;
-    color: rgba(245, 245, 245, 0.7);
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 1rem;
+    color: var(--copy-muted);
+    margin: 0 auto 2rem;
+    max-width: 56ch;
 }
 
 .cta-buttons {
@@ -915,15 +1194,15 @@ h1, h2, h3, h4, h5, h6 {
    ======================== */
 
 .footer {
-    padding: 4rem 0 2rem;
+    padding: clamp(3rem, 6vw, 5rem) 0 2rem;
     background: var(--dark-gray);
-    border-top: 1px solid rgba(201, 169, 97, 0.2);
+    border-top: 1px solid var(--rule);
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr 0.85fr;
-    gap: 3rem;
+    gap: clamp(1.5rem, 3vw, 3rem);
     margin-bottom: 3rem;
 }
 
@@ -946,8 +1225,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-text {
+    max-width: 28ch;
     font-size: 13px;
-    color: rgba(245, 245, 245, 0.6);
+    color: var(--copy-muted);
+    line-height: 1.75;
 }
 
 .footer-title {
@@ -977,6 +1258,15 @@ h1, h2, h3, h4, h5, h6 {
 .footer-info a:hover,
 .footer-hours a:hover {
     color: #dab77a;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.footer-info a:focus-visible,
+.footer-hours a:focus-visible,
+.social-links a:focus-visible {
+    outline-color: var(--white);
+    outline-offset: 4px;
 }
 
 .social-links {
@@ -1115,6 +1405,17 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 @media (hover: none) {
     .cta-button:hover,
     .cta-primary:hover,
@@ -1145,20 +1446,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ========================
    Responsive Design
-   Compress the desktop editorial world — do not restack it.
+   Desktop keeps the editorial asymmetry.
+   Tablet compresses it. Phone stacks it —
+   squeezing multi-column grids into ~360px
+   clips text instead of reflowing it.
    ======================== */
 
-@media (max-width: 1100px) {
-    .navbar-menu {
-        gap: 1.35rem;
-    }
-
-    .footer-grid {
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 960px) {
+@media (max-width: 1180px) {
     .navbar {
         padding: 1rem 0;
     }
@@ -1224,33 +1518,54 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 11px;
     }
 
+    .footer-grid {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 960px) {
     .sobre-grid {
         gap: 2.25rem;
     }
 
     .sobre-image img {
-        height: 460px;
+        aspect-ratio: 4 / 5;
     }
 
-    .experiencia-grid {
-        gap: 2rem 2.25rem;
-        max-width: none;
+    .barbeiro-card:nth-child(n+2) {
+        grid-template-columns: minmax(5.5rem, 0.5fr) minmax(0, 1fr);
+        column-gap: 0.85rem;
+    }
+
+    .barbeiro-card:nth-child(n+2) .barbeiro-image {
+        height: 150px;
+    }
+
+    .experiencia-intro {
+        max-width: 46rem;
+    }
+
+    .experiencia-item {
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+        gap: 0.75rem;
+        width: min(78%, 38rem);
     }
 
     .experiencia-item:nth-child(odd) {
-        padding-right: 1rem;
+        padding-right: 1.5rem;
     }
 
     .experiencia-item:nth-child(even) {
-        padding-left: 1rem;
+        padding-left: 1.5rem;
     }
 
-    .experiencia-number {
-        font-size: 48px;
+    .servicos-layout {
+        gap: 1.25rem 1.75rem;
     }
 
-    .servicos-grid {
-        gap: 1.25rem 1.5rem;
+    .servico-lead {
+        min-height: 0;
+        padding: 2rem 1.75rem;
     }
 
     .servico-card {
@@ -1270,14 +1585,17 @@ h1, h2, h3, h4, h5, h6 {
         height: 360px;
     }
 
-    .galeria-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-rows: 160px;
-        gap: 1rem;
+    .galeria-mosaico {
+        grid-template-rows: minmax(120px, 14vw) minmax(120px, 14vw) minmax(145px, 17vw);
+        gap: 0.6rem;
     }
 
-    .depoimentos-grid {
-        gap: 1.15rem;
+    .depoimentos-layout {
+        gap: 2.5rem 2.5rem;
+    }
+
+    .depoimentos-coluna {
+        padding-left: 1.75rem;
     }
 
     .depoimento-card,
@@ -1294,29 +1612,42 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 720px) {
     .section-title {
         margin-bottom: 2rem;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.03em;
+        overflow-wrap: anywhere;
+    }
+
+    .hero {
+        min-height: 34rem;
     }
 
     .hero-content {
-        padding-top: 3.5rem;
+        padding-top: 4.5rem;
     }
 
     .hero-badge {
-        margin-bottom: 1.15rem;
+        margin-bottom: 1rem;
     }
 
     .hero-title {
-        font-size: clamp(34px, 9.2vw, 52px);
-        margin-bottom: 1.1rem;
+        max-width: 12ch;
+        font-size: clamp(2.75rem, 10vw, 4rem);
+        margin-bottom: 1rem;
     }
 
     .hero-subtitle {
-        font-size: clamp(14px, 3.6vw, 17px);
-        margin-bottom: 1.75rem;
+        max-width: 38ch;
+        font-size: clamp(0.9rem, 3.8vw, 1rem);
+        margin-bottom: 1.5rem;
     }
 
     .hero-ctas {
-        gap: 0.75rem;
+        justify-content: flex-start;
+        gap: 0.65rem;
+    }
+
+    .hero-scroll {
+        left: var(--page-x);
+        bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
     }
 
     .hero-ctas a,
@@ -1324,8 +1655,12 @@ h1, h2, h3, h4, h5, h6 {
         padding: 0.9rem 1.35rem;
         font-size: 11px;
         min-height: 44px;
-        width: auto;
-        flex: 1 1 12.5rem;
+        width: 100%;
+        max-width: 22rem;
+        flex: 1 1 100%;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.3;
     }
 
     .cta-primary.large,
@@ -1335,15 +1670,22 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .sobre-grid {
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-        gap: 1.25rem;
-        align-items: stretch;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: start;
     }
 
     .sobre-image img {
-        height: 100%;
-        min-height: 240px;
-        max-height: 340px;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
+
+    .sobre-image::after {
+        width: 48%;
+        height: 48%;
     }
 
     .section-text {
@@ -1352,61 +1694,103 @@ h1, h2, h3, h4, h5, h6 {
         margin-bottom: 1rem;
     }
 
-    .sobre-stats {
+    .sobre-content .sobre-stats {
         gap: 1rem;
         margin-top: 1.5rem;
         padding-top: 1.25rem;
+    }
+
+    .sobre-image {
+        padding: 0 0.75rem 0.75rem 0;
+    }
+
+    .sobre-content .section-title {
+        max-width: 14ch;
+        margin-bottom: 1.25rem;
+        font-size: clamp(2rem, 5vw, 2.75rem);
     }
 
     .stat-number {
         font-size: 28px;
     }
 
-    .experiencia-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.25rem 1.25rem;
+    .experiencia-intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
 
-    .servicos-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.85rem;
+    .experiencia-intro .section-title {
+        max-width: 16ch;
+        font-size: clamp(1.8rem, 7vw, 2.75rem);
+    }
+
+    .experiencia-intro > p {
+        font-size: 0.9rem;
+    }
+
+    .experiencia-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .servicos-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .servico-lead {
+        min-height: 0;
+        padding: 2rem 1.5rem 1.75rem;
+    }
+
+    .servico-lead .servico-descricao {
+        max-width: none;
     }
 
     .experiencia-item {
-        padding: 1.15rem 0;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: 0.75rem;
+        width: 88%;
+        padding: 1.25rem 0;
+        border-left: none;
+        border-bottom: 1px solid rgba(201, 169, 97, 0.2);
     }
 
     .experiencia-item:nth-child(odd),
     .experiencia-item:nth-child(even) {
+        text-align: left;
         padding-left: 0;
         padding-right: 0;
     }
 
-    .experiencia-number {
-        font-size: 36px;
-        margin-bottom: 0.45rem;
+    .experiencia-item:nth-child(even) {
+        justify-self: end;
+    }
+
+    .experiencia-item:last-child {
+        border-bottom: none;
     }
 
     .experiencia-title {
-        font-size: 13px;
-        margin-bottom: 0.5rem;
+        font-size: 14px;
+        margin-bottom: 0.4rem;
     }
 
     .experiencia-item p {
         font-size: 13px;
-        line-height: 1.55;
+        line-height: 1.65;
     }
 
-    .servico-card {
-        padding: 1.25rem;
+    .servicos-lista .servico-card {
+        padding: 1.35rem 0 1.35rem 3.5rem;
     }
 
     .servico-nome {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .servico-descricao {
-        font-size: 13px;
+        font-size: 14px;
         margin-bottom: 1rem;
     }
 
@@ -1414,62 +1798,118 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 20px;
     }
 
-    .galeria-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-rows: 110px;
-        gap: 0.65rem;
+    /* Same 12-column mosaic as desktop, just tighter —
+       a 2-column stack loses the hero/wide rhythm. */
+    .galeria-mosaico {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        grid-template-rows: 96px 96px 124px;
+        gap: 0.4rem;
     }
 
-    .galeria-item-tall {
-        grid-row: span 2;
+    .galeria-item-hero { grid-column: 1 / 8; grid-row: 1 / 3; }
+    .galeria-item-wide { grid-column: 8 / 13; grid-row: 1 / 3; }
+    .galeria-item:nth-child(3) { grid-column: 1 / 4; grid-row: 3; }
+    .galeria-item:nth-child(4) { grid-column: 4 / 8; grid-row: 3; }
+    .galeria-item:nth-child(5) { grid-column: 8 / 11; grid-row: 3; }
+    .galeria-item:nth-child(6) { grid-column: 11 / 13; grid-row: 3; }
+
+    .galeria-legenda {
+        left: 0.5rem;
+        bottom: 0.45rem;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+    }
+
+    .galeria-overlay {
+        padding: 0.4rem;
     }
 
     .barbeiros-grid {
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-        gap: 1.25rem 1rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.25rem;
     }
 
-    .barbeiro-image {
-        height: 160px;
-        margin-bottom: 0.85rem;
+    .barbeiro-card:first-child {
+        grid-row: auto;
     }
 
+    .barbeiro-image,
     .barbeiro-card:first-child .barbeiro-image {
-        height: 250px;
+        height: auto;
+        aspect-ratio: 4 / 5;
+        max-height: 420px;
+        margin-bottom: 1.15rem;
+    }
+
+    .barbeiro-card:nth-child(n+2) {
+        display: block;
+    }
+
+    .barbeiro-card:nth-child(n+2) .barbeiro-image {
+        height: auto;
+        aspect-ratio: 4 / 5;
+        max-height: 420px;
+        margin-bottom: 1.15rem;
+    }
+
+    .barbeiro-card:nth-child(n+2) .barbeiro-nome,
+    .barbeiro-card:nth-child(n+2) .barbeiro-titulo,
+    .barbeiro-card:nth-child(n+2) .barbeiro-descricao {
+        grid-column: auto;
     }
 
     .barbeiro-nome {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .barbeiro-titulo {
-        font-size: 13px;
+        font-size: 15px;
         margin-bottom: 0.45rem;
     }
 
     .barbeiro-descricao {
-        font-size: 12px;
-        line-height: 1.55;
+        font-size: 14px;
+        line-height: 1.65;
     }
 
-    .depoimentos-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.65rem;
+    .depoimentos-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .depoimentos-coluna {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--rule);
+        padding-top: 0.25rem;
+    }
+
+    .depoimento-lead {
+        padding-bottom: 0;
+    }
+
+    .depoimentos-coluna .depoimento-card {
+        padding: 1.35rem 0;
+    }
+
+    .depoimento-lead .depoimento-texto {
+        font-size: clamp(26px, 7.4vw, 36px);
+        margin-bottom: 1.5rem;
     }
 
     .depoimento-card,
     .depoimento-card:nth-child(2) {
-        padding: 1rem 0.85rem;
+        padding: 1.5rem 1.25rem;
     }
 
     .depoimento-texto {
-        font-size: 12px;
-        line-height: 1.55;
-        margin-bottom: 1rem;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
     }
 
     .depoimento-autor {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     .depoimento-stars {
@@ -1491,8 +1931,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem 1.25rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
         margin-bottom: 1.75rem;
     }
 
@@ -1520,82 +1960,79 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 430px) {
+    .experiencia-item {
+        grid-template-columns: 1.75rem minmax(0, 1fr);
+        gap: 0.5rem;
+    }
+
     .navbar-text {
         display: none;
     }
 
-    .sobre-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-        gap: 0.9rem;
-    }
-
     .sobre-image img {
-        min-height: 200px;
-        max-height: 280px;
+        aspect-ratio: 3 / 2;
     }
 
     .section-text {
-        font-size: 13px;
+        font-size: 14px;
+    }
+
+    .barbeiro-card:nth-child(n+2) {
+        display: block;
+    }
+
+    .barbeiro-card:nth-child(n+2) .barbeiro-image {
+        height: auto;
+        aspect-ratio: 4 / 5;
+        margin-bottom: 1.15rem;
     }
 
     .stat-number {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .stat-label {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .experiencia-number {
-        font-size: 30px;
+        font-size: 32px;
     }
 
     .experiencia-title {
-        font-size: 11px;
+        font-size: 14px;
         letter-spacing: 0.04em;
     }
 
     .experiencia-item p {
-        font-size: 12px;
+        font-size: 14px;
     }
 
-    .servico-card {
-        padding: 1rem 0.85rem;
+    .servicos-lista .servico-card {
+        padding: 1.15rem 0 1.15rem 3.1rem;
+    }
+
+    .servico-lead {
+        padding: 1.75rem 1.25rem 1.5rem;
     }
 
     .servico-nome {
-        font-size: 11px;
+        font-size: 14px;
     }
 
     .servico-descricao {
-        font-size: 12px;
-        line-height: 1.45;
+        font-size: 13px;
+        line-height: 1.55;
     }
 
-    .galeria-grid {
-        grid-auto-rows: 96px;
-        gap: 0.5rem;
-    }
-
-    .barbeiro-card:first-child .barbeiro-image {
-        height: 210px;
-    }
-
-    .barbeiro-image {
-        height: 132px;
-    }
-
-    .depoimento-texto {
-        font-size: 11px;
+    .galeria-mosaico {
+        grid-template-rows: 86px 86px 110px;
+        gap: 0.32rem;
     }
 
     .hero-ctas a,
     .cta-buttons a {
-        flex: 1 1 9.5rem;
         padding: 0.85rem 1rem;
-        white-space: normal;
-        text-align: center;
-        line-height: 1.3;
     }
 }
 
@@ -1610,13 +2047,9 @@ h1, h2, h3, h4, h5, h6 {
         gap: 0.75rem;
     }
 
-    .experiencia-grid,
-    .servicos-grid {
-        gap: 0.5rem;
-    }
-
-    .depoimentos-grid {
-        gap: 0.45rem;
+    .galeria-mosaico {
+        grid-template-rows: 78px 78px 96px;
+        gap: 0.28rem;
     }
 
     .footer-logo {
@@ -1629,6 +2062,10 @@ h1, h2, h3, h4, h5, h6 {
         height: auto;
         min-height: 100svh;
         padding: 5.5rem 0 3.5rem;
+    }
+
+    .hero-content {
+        padding-top: 0;
     }
 
     .hero-scroll {

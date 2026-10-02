@@ -40,7 +40,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 960 && navbarMenu.classList.contains('active')) {
+    if (window.innerWidth > 1180 && navbarMenu.classList.contains('active')) {
         setMenuOpen(false);
     }
 });
