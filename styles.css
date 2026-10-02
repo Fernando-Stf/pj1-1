@@ -394,6 +394,12 @@ p {
     object-position: center 42%;
 }
 
+@media (max-width: 720px) {
+    .hero-background img {
+        object-position: center;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -1004,14 +1010,21 @@ p {
 }
 
 .barbeiro-card:first-child .barbeiro-image {
-    height: 450px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-height: 640px;
 }
 
 .barbeiro-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 28%;
     transition: transform var(--transition);
+}
+
+.barbeiro-card:first-child .barbeiro-image img {
+    object-position: center top;
 }
 
 .barbeiro-card:hover .barbeiro-image img {
@@ -1582,7 +1595,9 @@ p {
     }
 
     .barbeiro-card:first-child .barbeiro-image {
-        height: 360px;
+        height: auto;
+        aspect-ratio: 4 / 5;
+        max-height: 560px;
     }
 
     .galeria-mosaico {
@@ -2026,8 +2041,8 @@ p {
     }
 
     .galeria-mosaico {
-        grid-template-rows: 86px 86px 110px;
-        gap: 0.32rem;
+        grid-template-rows: none;
+        gap: 0.4rem;
     }
 
     .hero-ctas a,
@@ -2048,8 +2063,8 @@ p {
     }
 
     .galeria-mosaico {
-        grid-template-rows: 78px 78px 96px;
-        gap: 0.28rem;
+        grid-template-rows: none;
+        gap: 0.4rem;
     }
 
     .footer-logo {
@@ -2083,5 +2098,361 @@ p {
 
     .navbar-menu {
         padding-top: 4.5rem;
+    }
+}
+
+/* ========================
+   Mobile refinement
+   ======================== */
+
+@media (max-width: 720px) {
+    :root {
+        --page-x: clamp(1rem, 4.5vw, 1.4rem);
+        --section-y: clamp(3.5rem, 10vw, 4.5rem);
+    }
+
+    .container,
+    .container-full {
+        padding-left: max(var(--page-x), env(safe-area-inset-left, 0px));
+        padding-right: max(var(--page-x), env(safe-area-inset-right, 0px));
+    }
+
+    .navbar-container {
+        gap: clamp(0.5rem, 2vw, 1rem);
+    }
+
+    .navbar-brand {
+        min-width: 0;
+        gap: 0.5rem;
+        letter-spacing: 0.06em;
+    }
+
+    .navbar-logo {
+        flex: 0 0 auto;
+        font-size: 23px;
+    }
+
+    .navbar-toggle,
+    .cta-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .navbar-menu {
+        padding-left: max(var(--page-x), env(safe-area-inset-left, 0px));
+        padding-right: max(var(--page-x), env(safe-area-inset-right, 0px));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+    }
+
+    .nav-link {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero {
+        min-height: 34rem;
+        min-height: max(34rem, 100svh);
+    }
+
+    .hero-content {
+        padding: 6rem var(--page-x) 5rem;
+    }
+
+    .hero-title {
+        max-width: 11ch;
+        font-size: clamp(2.65rem, 9.5vw, 4rem);
+        line-height: 0.98;
+        overflow-wrap: normal;
+    }
+
+    .hero-subtitle {
+        max-width: 36ch;
+        line-height: 1.65;
+    }
+
+    .hero-ctas a,
+    .cta-buttons a {
+        max-width: 28rem;
+        min-height: 48px;
+    }
+
+    .sobre-grid,
+    .servicos-layout,
+    .barbeiros-grid,
+    .depoimentos-layout,
+    .footer-grid {
+        min-width: 0;
+    }
+
+    .sobre-content .section-title,
+    .experiencia-intro .section-title,
+    .servicos > .container > .section-title,
+    .galeria > .container-full > .section-title,
+    .cta-title {
+        max-width: 18ch;
+        font-size: clamp(2rem, 7.5vw, 2.85rem);
+        line-height: 1.08;
+        overflow-wrap: normal;
+    }
+
+    .sobre-content .section-text,
+    .section-text,
+    .experiencia-intro > p,
+    .servico-descricao,
+    .barbeiro-descricao,
+    .depoimento-texto,
+    .cta-subtitle,
+    .footer-text,
+    .footer-info p,
+    .footer-hours p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .experiencia-item {
+        width: min(92%, 34rem);
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
+    .experiencia-item:nth-child(even) {
+        justify-self: end;
+    }
+
+    .experiencia-number {
+        font-size: 1.25rem;
+    }
+
+    .experiencia-title {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+
+    .experiencia-item p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    .servicos-lista .servico-card {
+        padding: 1.4rem 0 1.4rem 3.25rem;
+    }
+
+    .servico-lead {
+        padding: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .servico-lead .servico-nome {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+
+    .servico-lead .servico-preco {
+        font-size: 2rem;
+    }
+
+    .galeria-mosaico {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+        grid-auto-rows: auto;
+        gap: clamp(0.5rem, 2vw, 0.75rem);
+    }
+
+    .galeria-item,
+    .galeria-item-hero,
+    .galeria-item-wide,
+    .galeria-item-tall,
+    .galeria-item:nth-child(3),
+    .galeria-item:nth-child(4),
+    .galeria-item:nth-child(5),
+    .galeria-item:nth-child(6) {
+        grid-column: span 1;
+        grid-row: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .galeria-item-hero,
+    .galeria-item-wide {
+        grid-column: 1 / -1;
+        aspect-ratio: 16 / 9;
+    }
+
+    .galeria-legenda {
+        left: 0.75rem;
+        bottom: 0.65rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+    }
+
+    .galeria-overlay {
+        padding: 0.5rem;
+    }
+
+    .galeria-expand {
+        width: 44px;
+        height: 44px;
+    }
+
+    .barbeiro-card:first-child .barbeiro-image,
+    .barbeiro-image,
+    .barbeiro-card:nth-child(n+2) .barbeiro-image {
+        width: 100%;
+        max-height: min(112vw, 34rem);
+        aspect-ratio: 4 / 5;
+    }
+
+    .depoimento-lead .depoimento-texto {
+        font-size: clamp(1.65rem, 7vw, 2.25rem);
+        line-height: 1.22;
+    }
+
+    .social-links {
+        gap: 0.75rem;
+    }
+
+    .social-links a {
+        width: 44px;
+        height: 44px;
+    }
+
+    .lightbox {
+        padding: max(4rem, env(safe-area-inset-top, 0px)) max(0.75rem, env(safe-area-inset-right, 0px)) max(5rem, env(safe-area-inset-bottom, 0px)) max(0.75rem, env(safe-area-inset-left, 0px));
+    }
+
+    .lightbox-image {
+        max-width: 100%;
+        max-height: min(68svh, 42rem);
+        margin: auto;
+    }
+
+    .lightbox-close {
+        top: max(0.5rem, env(safe-area-inset-top, 0px));
+        right: max(0.5rem, env(safe-area-inset-right, 0px));
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 430px) {
+    .hero {
+        min-height: max(33rem, 100svh);
+    }
+
+    .hero-content {
+        padding-top: 5.5rem;
+        padding-bottom: 4.5rem;
+    }
+
+    .hero-title {
+        max-width: 10ch;
+        font-size: clamp(2.5rem, 10.5vw, 3.25rem);
+    }
+
+    .sobre-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    .stat-number {
+        font-size: clamp(1.75rem, 8vw, 2.1rem);
+    }
+
+    .stat-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.07em;
+    }
+
+    .experiencia-item {
+        width: 94%;
+        grid-template-columns: 1.9rem minmax(0, 1fr);
+        gap: 0.55rem;
+    }
+
+    .experiencia-item p {
+        font-size: 0.875rem;
+    }
+
+    .servicos-lista .servico-card {
+        padding-left: 2.75rem;
+    }
+
+    .servico-indice {
+        font-size: 1.25rem;
+    }
+
+    .cta-buttons {
+        gap: 0.75rem;
+    }
+
+    .footer-grid {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --page-x: 1rem;
+    }
+
+    .navbar-container {
+        gap: 0.4rem;
+    }
+
+    .navbar-logo {
+        font-size: 21px;
+    }
+
+    .cta-button {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.65rem;
+    }
+
+    .hero-title {
+        font-size: 2.45rem;
+    }
+
+    .hero-ctas a,
+    .cta-buttons a {
+        padding-inline: 0.85rem;
+        font-size: 0.68rem;
+    }
+
+    .galeria-mosaico {
+        gap: 0.4rem;
+    }
+
+    .galeria-legenda {
+        left: 0.5rem;
+        bottom: 0.45rem;
+        font-size: 0.58rem;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) and (max-width: 960px) {
+    .hero {
+        min-height: 0;
+        padding: 5.25rem 0 2rem;
+    }
+
+    .hero-content {
+        padding: 0 var(--page-x);
+    }
+
+    .hero-title {
+        max-width: 18ch;
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .hero-ctas {
+        flex-wrap: wrap;
+    }
+
+    .hero-ctas a {
+        width: auto;
+        flex: 0 1 auto;
     }
 }
